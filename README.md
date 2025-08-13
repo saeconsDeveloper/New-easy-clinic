@@ -13,7 +13,7 @@ Follow these steps to run the project locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/saeconsDeveloper/easy-clinic
+   git clone https://github.com/saeconsDeveloper/New-easy-clinic
 2. Install dependencies using npm:
    ```bash
    npm install
