@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Super Admin – Users</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    .btn-primary{ background:#25989E; border-color:#25989E }
+    .btn-primary:hover{ background:#1c787d; border-color:#1c787d }
+    .header-div{ display:flex; justify-content:space-between; align-items:center; background:#25989E; padding:6px 10px }
+    .logo-image{ width:110px }
+    .tag{ padding:.15rem .5rem; border-radius:999px; font-size:.78rem }
+    .tag.ok{ background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0 }
+    .tag.no{ background:#fef2f2; color:#991b1b; border:1px solid #fecaca }
+    .table td, .table th{ vertical-align:middle }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header-div">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="/logo.jpeg" alt="logo" class="logo-image">
+    </a>
+    <a class="navbar-brand d-flex align-items-center" href="/logout" title="Logout">
+      <svg fill="#fff" height="44" width="44" viewBox="0 0 500 500"><g><path d="M250,224c-4.4,0-8,3.6-8,8v24c0,4.4-3.6,8-8,8h-40c-4.4,0-8-3.6-8-8V144c0-4.4,3.6-8,8-8h40c4.4,0,8,3.6,8,8v24 c0,4.4,3.6,8,8,8s8-3.6,8-8v-24c0-13.2-10.8-24-24-24h-40c-13.2,0-24,10.8-24,24v112c0,13.2,10.8,24,24,24h40 c13.2,0,24-10.8,24-24v-24C258,227.6,254.4,224,250,224z"/><path d="M328.4,204.8c.1-.1.2-.2.3-.3 0 0 0 0 0-.1.1-.2.2-.4.3-.6.1-.3.3-.5.4-.8.1-.3.2-.5.3-.8.1-.2.2-.4.2-.7.2-1 .2-2.1 0-3.1 0 0 0 0 0 0 0-.2-.1-.4-.2-.7-.1-.3-.1-.5-.2-.8 0 0 0 0 0 0-.1-.3-.3-.5-.4-.8-.1-.2-.2-.4-.3-.6-.3-.4-.6-.9-1-1.2l-32-32 c-3.1-3.1-8.2-3.1-11.3 0-3.1 3.1-3.1 8.2 0 11.3l18.3 18.3H210c-4.4 0-8 3.6-8 8s3.6 8 8 8h92.7l-18.3 18.3 c-3.1 3.1-3.1 8.2 0 11.3 1.6 1.6 3.6 2.3 5.7 2.3s4.1-.8 5.7-2.3l32-32c0 0 0 0 0 0 .3-.3.5-.6.8-.9z"/></g></svg>
+    </a>
+  </div>
+
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3 class="m-0">Super Admin – Users</h3>
+      <button class="btn btn-primary" id="btnAdd">Add Clinic</button>
+    </div>
+
+    <div class="d-flex gap-2 mb-3">
+      <input id="filter" class="form-control" placeholder="Search clinic name…">
+      <button class="btn btn-outline-secondary" id="clearFilter">Clear</button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="width:40%">Clinic Name</th>
+            <th style="width:15%; text-align:center">Admin Password</th>
+            <th style="width:15%; text-align:center">Viewer Password</th>
+            <th style="width:10%; text-align:center">Active</th>
+            <th style="width:20%; text-align:center">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div class="modal fade" id="clinicModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle">Add Clinic</h5>
+          <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formClinic" method="dialog">
+            <input type="hidden" name="id">
+            <div class="mb-3">
+              <label class="form-label">Clinic Name</label>
+              <input type="text" name="name" class="form-control" required>
+              <div class="form-text">Code is generated automatically from the name.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Admin Password <small class="text-muted">(min 8)</small></label>
+              <input type="password" name="adminPassword" class="form-control" placeholder="Leave blank to keep current">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Viewer Password <small class="text-muted">(min 8)</small></label>
+              <input type="password" name="viewerPassword" class="form-control" placeholder="Leave blank to keep current">
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="isActive" name="isActive" checked>
+              <label class="form-check-label" for="isActive">Active</label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" id="saveClinic">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(() => {
+  const $rows = $("#rows");
+  const $modal = new bootstrap.Modal(document.getElementById('clinicModal'));
+  const $form = $("#formClinic");
+  const $title = $("#modalTitle");
+  const $filter = $("#filter");
+
+  function badge(set) { return set ? '<span class="tag ok">Set</span>' : '<span class="tag no">Not set</span>'; }
+  function activeTag(on){ return on ? '<span class="tag ok">Yes</span>' : '<span class="tag no">No</span>'; }
+
+  async function api(path, opts={}) {
+    const res = await fetch(path, { headers:{ "Content-Type":"application/json" }, ...opts });
+    let body = {};
+    try { body = await res.json(); } catch {}
+    if (!res.ok) throw new Error(body.message || res.statusText);
+    return body;
+  }
+
+  let all = [];
+
+  function render() {
+    const q = $filter.val().trim().toLowerCase();
+    const data = q ? all.filter(c => c.name.toLowerCase().includes(q)) : all;
+
+    $rows.html(data.map(c => `
+      <tr data-id="${c.id}">
+        <td>
+          <div class="fw-semibold">${c.name}</div>
+          <div class="text-muted small">code: ${c.code || "-"}</div>
+        </td>
+        <td style="text-align:center">${badge(c.hasAdminPassword)}</td>
+        <td style="text-align:center">${badge(c.hasViewerPassword)}</td>
+        <td style="text-align:center">${activeTag(c.isActive)}</td>
+        <td style="text-align:center">
+          <button class="btn btn-sm btn-outline-secondary me-2" data-edit="${c.id}">Edit</button>
+          <button class="btn btn-sm btn-danger" data-del="${c.id}">Delete</button>
+        </td>
+      </tr>
+    `).join(""));
+  }
+
+  async function load() {
+    const { data } = await api("/api/v1/superadmin/clinics");
+    all = data || [];
+    render();
+  }
+
+  $("#btnAdd").on("click", () => {
+    $form[0].reset();
+    $form.find("[name=id]").val("");
+    $form.find("[name=adminPassword]").val("");
+    $form.find("[name=viewerPassword]").val("");
+    $("#isActive").prop("checked", true);
+    $title.text("Add Clinic");
+    $modal.show();
+  });
+
+  $rows.on("click", async (e) => {
+    const id = e.target.dataset.edit || e.target.dataset.del;
+    if (!id) return;
+
+    if (e.target.dataset.edit) {
+      const clinic = all.find(x => String(x.id) === String(id));
+      if (!clinic) return;
+      $form[0].reset();
+      $form.find("[name=id]").val(clinic.id);
+      $form.find("[name=name]").val(clinic.name);
+      $form.find("[name=adminPassword]").val("");
+      $form.find("[name=viewerPassword]").val("");
+      $("#isActive").prop("checked", !!clinic.isActive);
+      $title.text("Edit Clinic");
+      $modal.show();
+    }
+
+    if (e.target.dataset.del) {
+      if (!confirm("Delete this clinic?")) return;
+      await api(`/api/v1/superadmin/clinics/${id}`, { method: "DELETE" });
+      await load();
+    }
+  });
+
+  $("#saveClinic").on("click", async () => {
+    const id = $form.find("[name=id]").val();
+    const payload = {
+      name: $form.find("[name=name]").val().trim(),
+      adminPassword: $form.find("[name=adminPassword]").val().trim(),
+      viewerPassword: $form.find("[name=viewerPassword]").val().trim(),
+      isActive: $("#isActive").is(":checked")
+    };
+    if (!payload.name) return alert("Clinic name is required");
+
+    if (!id) {
+      await api("/api/v1/superadmin/clinics", { method:"POST", body: JSON.stringify(payload) });
+    } else {
+      if (!payload.adminPassword) delete payload.adminPassword;
+      if (!payload.viewerPassword) delete payload.viewerPassword;
+      await api(`/api/v1/superadmin/clinics/${id}`, { method:"PATCH", body: JSON.stringify(payload) });
+    }
+    $modal.hide();
+    await load();
+  });
+
+  $("#clearFilter").on("click", () => { $filter.val(""); render(); });
+  $filter.on("input", render);
+
+  load();
+})();
+</script>
+</body>
+</html>

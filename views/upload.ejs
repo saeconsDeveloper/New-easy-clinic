@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Med Clinic</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.17/css/intlTelInput.min.css" />
+
+  <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <style>
+    .table-container { overflow-y: auto; }
+    .pagination { margin-top: 20px; }
+    textarea { resize: vertical; }
+  </style>
+</head>
+<body>
+<div class="container mt-5" id="mainContainer">
+  <style>
+    /* Desktop styles (default) */
+    .container {
+      max-width: 1300px;
+      /* padding: 0 15px; */
+    }
+    .form-control {
+      font-size: 1rem;
+      padding: 0.5rem;
+    }
+    .btn {
+      font-size: 1rem;
+      padding: 0.3rem .7rem;
+    }
+    .table-container {
+      overflow-x: auto;
+    }
+    /* .table th, .table td {
+      padding: 0.75rem;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    } */
+    .pagination {
+      font-size: 1rem;
+    }
+    label {
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+    #items-per-page {
+      font-size: 1rem;
+      /* padding: 0.5rem; */
+    }
+
+        .birthdateDiv{
+      display: flex;
+      width: 100%;
+      align-items: center;
+    }
+
+        .navbar-brand .logo-text {
+      color: #3A4F52;
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-left: 10px;
+    }
+    .logo-image{
+      width: 110px;
+    }
+
+        .main-diagnose-div{
+      display: flex;
+       gap: 0.5rem;
+    }
+       #uploadModalButton{
+      display: block;
+    }
+  .btn-primary{
+    background-color: #25989E;
+    color: white;
+    border: none;
+  }
+  .btn-primary:hover{
+    background-color: #25989E;
+    color: white;
+    border: none;
+  }
+  .btn-primary:active{
+    background-color: #25989E!important;
+    color: white!important;
+    border: none!important;
+  } 
+
+    .view-patient{
+    background-color: #25989E;
+    color: white;
+    border: none;
+  }
+  .view-patient:hover{
+    background-color: #25989E;
+    color: white;
+    border: none;
+  }
+  .view-patient:active{
+    background-color: #25989E!important;
+    color: white!important;
+    border: none!important;
+  }
+
+  .header-div{
+    display: flex;
+  }
+
+
+      .page-item.active .page-link {
+    background-color: #25989E;
+    border-color: #25989E; 
+}
+
+.page-link {
+    color: #25989E; 
+}
+
+    /* Mobile styles (screens <= 768px) */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 10px;
+      }
+      /* Stack flex containers vertically */
+      .d-flex {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.5rem;
+      }
+      /* Full-width inputs and labels */
+      /* .d-flex > div {
+        width: 100%;
+        margin-bottom: 0.75rem;
+      } */
+      .form-control {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0.3rem 0 !important;
+        font-size: 0.9rem;
+        padding: 0.6rem;
+      }
+      label {
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+        display: block;
+      }
+      /* Full-width buttons with touch-friendly size */
+      .btn {
+        width: 100%;
+        margin: 0.5rem 0;
+        font-size: 0.9rem;
+        padding: 0.75rem;
+      }
+      /* Table adjustments */
+      .table-container {
+        overflow-x: auto;
+      }
+      .table th, .table td {
+        font-size: 0.85rem;
+        padding: 0.5rem;
+        min-width: 100px; /* Ensure columns don't collapse too much */
+      }
+ 
+      /* .table th:nth-child(4), .table td:nth-child(4),
+      .table th:nth-child(5), .table td:nth-child(5) {
+        display: none;
+      } */
+      /* Pagination and items per page */
+      .pagination {
+        font-size: 0.9rem;
+      }
+      .pagination .page-link {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+      #items-per-page {
+        width: 100% !important;
+        max-width: none !important;
+        font-size: 0.9rem;
+        padding: 0.6rem;
+      }
+         .birthButtonDiv{
+        width: 20%;
+      }
+      .birthInputDiv{
+        width: 80%;
+      }
+
+    .diagnoseFrom{
+      width: 50%;
+    }
+    .diagnoseTo{
+      width: 50%;
+    }
+    #uploadModalButton{
+      display: none;
+    }
+    
+    }
+
+    /* Extra small screens (e.g., <= 576px) */
+    @media (max-width: 576px) {
+      .form-control {
+        font-size: 0.85rem;
+        padding: 0.5rem;
+      }
+      .btn {
+        font-size: 0.85rem;
+        padding: 0.65rem;
+      }
+      .table th, .table td {
+        font-size: 0.8rem;
+        padding: 0.4rem;
+        min-width: 80px;
+      }
+      label {
+        font-size: 0.85rem;
+      }
+      .pagination {
+        font-size: 0.85rem;
+      }
+      .pagination .page-link {
+        padding: 0.5rem 0.8rem;
+      }
+   
+    }
+  </style>
+ <div class=" justify-content-between header-div" style="
+    background-color: #25989E;">
+
+    <a class="navbar-brand d-flex align-items-center"  style="margin-bottom: 15px;">
+      
+      <span class="logo-text"></span>
+      <img src="logo.jpeg" alt="" class="logo-image" >
+    </a>
+    <a class="navbar-brand d-flex align-items-center" href="/logout" style="margin-bottom: 15px;">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff" height="80px" width="80px" version="1.1" id="Layer_1" viewBox="0 0 500 500" enable-background="new 0 0 500 500" xml:space="preserve">
+<g>
+	<path d="M250,224c-4.4,0-8,3.6-8,8v24c0,4.4-3.6,8-8,8h-40c-4.4,0-8-3.6-8-8V144c0-4.4,3.6-8,8-8h40c4.4,0,8,3.6,8,8v24   c0,4.4,3.6,8,8,8s8-3.6,8-8v-24c0-13.2-10.8-24-24-24h-40c-13.2,0-24,10.8-24,24v112c0,13.2,10.8,24,24,24h40c13.2,0,24-10.8,24-24   v-24C258,227.6,254.4,224,250,224z"/>
+	<path d="M328.4,204.8c0.1-0.1,0.2-0.2,0.3-0.3c0,0,0,0,0-0.1c0.1-0.2,0.2-0.4,0.3-0.6c0.1-0.3,0.3-0.5,0.4-0.8   c0.1-0.3,0.2-0.5,0.3-0.8c0.1-0.2,0.2-0.4,0.2-0.7c0.2-1,0.2-2.1,0-3.1c0,0,0,0,0,0c0-0.2-0.1-0.4-0.2-0.7   c-0.1-0.3-0.1-0.5-0.2-0.8c0,0,0,0,0,0c-0.1-0.3-0.3-0.5-0.4-0.8c-0.1-0.2-0.2-0.4-0.3-0.6c-0.3-0.4-0.6-0.9-1-1.2l-32-32   c-3.1-3.1-8.2-3.1-11.3,0c-3.1,3.1-3.1,8.2,0,11.3l18.3,18.3H210c-4.4,0-8,3.6-8,8s3.6,8,8,8h92.7l-18.3,18.3   c-3.1,3.1-3.1,8.2,0,11.3c1.6,1.6,3.6,2.3,5.7,2.3s4.1-0.8,5.7-2.3l32-32c0,0,0,0,0,0C327.9,205.4,328.1,205.1,328.4,204.8z"/>
+</g>
+</svg>
+    </a>
+  </div>
+  <div class="d-flex justify-content-between align-items-center mt-2">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newModal">Add New Patient</button>
+    <button class="btn btn-primary" id="uploadModalButton" data-bs-toggle="modal" data-bs-target="#uploadModal">Import Patient</button>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <label for="searchPatientName">Patient Name:</label>
+      <input type="text" id="searchPatientName" class="form-control m-3" style="max-width: 180px;">
+      <label for="searchPatientAddress">Address:</label>
+      <input type="text" id="searchPatientAddress" class="form-control m-3" style="max-width: 180px;">
+      <label for="searchPatientMobileNo">Mobile No:</label>
+      <input type="number" id="searchPatientMobileNo" class="form-control m-3" style="max-width: 180px;">
+    </div>
+        <div class="d-flex align-items-center">
+
+      <div class="d-flex align-items-center">
+
+        <label for="birthdateFrom">DOB From:</label>
+        <div class="birthdateDiv">
+
+          <div  class="birthInputDiv" >
+            <input type="text" id="birthdateFrom" min="1800" max="2099" step="1" class="form-control" style="max-width: 100px;" placeholder="Select year">
+            
+          </div>
+          <div class="birthButtonDiv"  >
+            <button class="btn btn-outline-secondary clear-btn-from" data-target="#birthdateFrom" type="button" style="border-color: #dee2e6;">Clear</button>
+          </div>
+        </div>
+      </div> 
+      <div class="d-flex align-items-center">
+
+        <label for="birthdateTo">to:</label>
+             <div class="birthdateDiv">
+         <div  class="birthInputDiv" >
+        <input type="text" id="birthdateTo" min="1800" max="2099" step="1" class="form-control" style="max-width: 100px;" placeholder="Select year">
+        </div>
+        <div class="birthButtonDiv"  >
+            <button class="btn btn-outline-secondary clear-btn-to" data-target="#birthdateTo" type="button" style="border-color: #dee2e6;">Clear</button>
+          </div>
+          </div>
+      </div>
+      
+    </div>
+
+  </div>
+  <div class="d-flex justify-content-between mb-3 align-items-center">
+    <label for="searchDiagnose">Diagnose:</label>
+    <input type="text" id="searchDiagnose" class="form-control m-3" style="max-width: 200px;">
+    <label for="searchTreatment">Treatment:</label>
+    <input type="text" id="searchTreatment" class="form-control m-3" style="max-width: 200px;">
+        <div class="main-diagnose-div">
+
+      <div class="d-flex align-items-center diagnoseFrom">
+        
+        <label for="fromDate">From:</label>
+        <input type="date" id="fromDate" class="form-control m-3" style="max-width: 200px;">
+      </div>
+      <div class="d-flex align-items-center diagnoseTo">
+        
+        <label for="toDate">To:</label>
+        <input type="date" id="toDate" class="form-control m-3" style="max-width: 200px;">
+      </div>
+    </div>
+  </div>
+
+       <div class="d-flex justify-content-end align-items-center mb-2">
+        <button class="btn btn-primary" id="exportButton"  >Export</button>
+      </div>
+
+  <!-- Table for Patient Data -->
+  <div class="table-container">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Patient Name</th>
+          <th>Patient DOB</th>
+          <th>Patient Address</th>
+          <th style="text-align: center;">Lab Report</th>
+          <th style="text-align: center;">Last Visit</th>
+          <th style="text-align: center;">Diagnose Record</th>
+        </tr>
+      </thead>
+      <tbody id="patientTableBody"></tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-end align-items-center mb-2">
+    <label class="me-2">Items per page:</label>
+    <select id="items-per-page" class="form-select w-auto">
+      <option value="10" selected>10</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option value="200">200</option>
+      <option value="300">300</option>
+      <option value="500">500</option>
+      <option value="1000">1000</option>
+    </select>
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center" id="pagination-controls"></ul>
+  </nav>
+</div>
+
+
+  <!-- Upload Modal -->
+  <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="uploadModalLabel">Upload Excel File</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="uploadForm" enctype="multipart/form-data" method="POST">
+            <div class="mb-3">
+              <input type="file" class="form-control" name="file" accept=".xlsx, .xls" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+          </form>
+          <div id="uploadStatus" class="mt-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- View Modal -->
+  <div class="modal fade modal-lg" id="viewModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="uploadModalLabel">view</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- <form id="uploadForm" enctype="multipart/form-data" method="POST">
+            <div class="mb-3">
+              <input type="file" class="form-control" name="file" accept=".xlsx, .xls" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+          </form> -->
+          <div id="uploadStatus" class="mt-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preview/Edit Modal -->
+  <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="previewModalLabel">Preview and Edit Patient Data</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Patient Details -->
+          <h6>Patient Details</h6>
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" id="patientName">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">DOB</label>
+            <input type="text" class="form-control" id="patientBirthdate">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Address</label>
+            <input type="text" class="form-control" id="patientAddress">
+          </div>
+
+          <!-- Diagnosis Records -->
+          <h6>Diagnosis Records</h6>
+          <div id="diagnosisRecords"></div>
+          <button class="btn btn-sm btn-outline-primary mt-2" id="addDiagnosis">Add Diagnosis</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveChanges">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Edit Modal (for existing records) -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Edit Patient Data</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+      <div class="modal-body" id="diagnosisModalBody" style="max-height: 70vh; overflow-y: auto;">
+            <!-- Patient Details -->
+             <div class="d-flex justify-content-between align-items-center">
+
+               <h6>Patient Details</h6>
+               <button id="add-diagnose-btn" class="btn btn-sm btn-primary">Add Diagnose</button>
+              </div>
+            <input type="hidden" id="editPatientId">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" id="editPatientName">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">DOB</label>
+              <input type="text" class="form-control" id="editPatientBirthdate">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Address</label>
+              <input type="text" class="form-control" id="editPatientAddress">
+            </div>
+            <div class="mb-3">
+            <label class="form-label">Mobile Number</label>
+            <div class="d-flex">
+              <input type="text" class="form-control" id="editPatientPhoneCode" style="width: 20%; margin-right: 10px;" placeholder="+961">
+              <input type="number" class="form-control" id="editPatientPhoneNumber" style="width: 80%;">
+            </div>
+          </div> 
+  
+            <!-- Diagnosis Records -->
+            <h6>Diagnosis Records</h6>
+            <div id="editDiagnosisRecords"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveEditChanges">Save Changes</button>
+            <button type="button" class="btn btn-primary" id="saveAddChanges">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      <!-- Add Patient Modal -->
+  <div class="modal fade" id="newModal" tabindex="-1" aria-labelledby="newModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newModalLabel">Add New Patient</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Patient Details -->
+          <h6>Patient Details</h6>
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" id="newPatientName" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">DOB</label>
+            <input type="text" class="form-control" id="newPatientBirthdate">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Address</label>
+            <input type="text" class="form-control" id="newPatientAddress">
+          </div>        
+          <div class="mb-3">
+            <label class="form-label">Mobile No.</label>
+            <div class="d-flex">
+              <input type="text" class="form-control" id="newPatientPhoneCode" style="width: 20%; margin-right: 10px;" placeholder="+961">
+              <input type="number" class="form-control" id="newPatientPhoneNumber" style="width: 80%;">
+            </div>
+          </div>        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveNewPatient">Add Patient</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.17/js/utils.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.17/js/intlTelInput.min.js"></script>
+
+  <script>
+
+
+ let cross = `<svg xmlns="http://www.w3.org/2000/svg" fill="#FF0000" width="20px" height="20px" viewBox="0 0 32 32">
+    <path d="M18.8,16l5.5-5.5c0.8-0.8,0.8-2,0-2.8l0,0C24,7.3,23.5,7,23,7c-0.5,0-1,0.2-1.4,0.6L16,13.2l-5.5-5.5  c-0.8-0.8-2.1-0.8-2.8,0C7.3,8,7,8.5,7,9.1s0.2,1,0.6,1.4l5.5,5.5l-5.5,5.5C7.3,21.9,7,22.4,7,23c0,0.5,0.2,1,0.6,1.4  C8,24.8,8.5,25,9,25c0.5,0,1-0.2,1.4-0.6l5.5-5.5l5.5,5.5c0.8,0.8,2.1,0.8,2.8,0c0.8-0.8,0.8-2.1,0-2.8L18.8,16z"/>
+</svg>`
+
+ let tick = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#008000" height="16px" width="16px" version="1.1" id="Layer_1" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+<polygon points="437.3,30 202.7,339.3 64,200.7 0,264.7 213.3,478 512,94 "/>
+</svg>`
+
+
+  let from 
+  let to 
+  let searchPatientName 
+  let searchPatientAddress
+  let searchPatientMobileNo
+  let patientYearFrom 
+  let patientYearTo 
+  let searchTreatment 
+  let searchDiagnose
+  let limit = 10;
+  let currentPage = 1;
+
+ let patients = [];
+        // validation of avoiding future date
+
+  const today = new Date().toISOString().split('T')[0];
+  $("input[type='date']").each(function () {
+    $(this).attr('max', today);
+     // Force reflow trick for iOS Safari
+    const clone = $(this).clone(true);
+    $(this).replaceWith(clone);
+  });
+
+function viewPatientDetails(index) {
+  let selected = patients[index];
+          if (Array.isArray(selected.diagnoses) && selected.diagnoses.length > 1) {
+  selected.diagnoses.sort((a, b) => new Date(a.date) - new Date(b.date));
+}
+
+let cleanedNumber = selected.mobileNumber
+if(selected.mobileNumber){
+   cleanedNumber = cleanedNumber.replace(/-/g, '');
+}
+
+  const container = $('#viewModal .modal-body');
+  container.empty();
+  const html = `
+      <div class="d-flex justify-content-between align-items-center mb-3">
+    <h6>Patient Details</h6>
+    <button id="download-pdf-btn" class="btn btn-sm btn-primary">Download as PDF</button>
+  </div>
+
+   <div id="patient-pdf-content">
+    <p><strong>Name:</strong> ${selected.name || ' -'}</p>
+    <p><strong>DOB:</strong> ${selected.birthdate || '-'}</p>
+    <p><strong>Address:</strong> ${selected.address || ' -'}</p>
+    <p><strong>Mobile Number:</strong> ${cleanedNumber || ' -'}</p>
+
+    <h6>Diagnosis Records</h6>
+      <hr />
+    ${selected.diagnoses && selected.diagnoses.length > 0 ? selected.diagnoses.map(record => `
+      <div class="mb-3">
+        <p><strong>Date:</strong> ${ new Date(record.date).toLocaleDateString('en-GB') || ''}</p>
+        <p><strong>Diagnosis:</strong> ${record.diagnosis ? record.diagnosis.split('\n').join(' | ') : ' - '}</p>
+        <p><strong>Treatment:</strong> ${record.treatment ? record.treatment.split('\n').join(' | ') : ' - '}</p>
+         ${
+        record.labReports && record.labReports.length > 0
+        ? `<p><strong>Lab Report:</strong> ${record.labReports.map(file => `
+              <a href="${file.url}" target="_blank">${file.fileName}</a>
+          `).join(' | ')}</p>`
+        : '<p><strong>Lab Report:</strong> - </p>'
+      }
+        <hr />
+      </div>
+    `).join('') : '<p> - </p>'}
+     </div>
+  `;
+
+  container.html(html);
+}
+   
+function showEditModal(index, type) {
+        let patient = patients[index];
+
+     
+
+        if (Array.isArray(patient.diagnoses) && patient.diagnoses.length > 1) {
+  patient.diagnoses.sort((a, b) => new Date(a.date) - new Date(b.date));
+}
+
+        $('#editPatientId').val(patient.patientId);
+        $('#editPatientName').val(patient.name);
+        $('#editPatientBirthdate').val(patient.birthdate);
+        $('#editPatientAddress').val(patient.address);
+        if(patient.mobileNumber != null){
+          let mobileNo = patient.mobileNumber
+          mobileNo = mobileNo.split('-')
+          $('#editPatientPhoneCode').val(mobileNo[0]);
+          $('#editPatientPhoneNumber').val(mobileNo[1]);
+
+        }else{
+          $('#editPatientPhoneCode').val('+961');
+          $('#editPatientPhoneNumber').val('');
+        }
+        $('#editDiagnosisRecords').empty();
+
+           if(type){
+           $('#saveAddChanges').hide();
+           $('#saveEditChanges').show();
+           $('#editPatientName').prop('disabled', false);
+           $('#editPatientBirthdate').prop('disabled', false);
+           $('#editPatientAddress').prop('disabled', false);
+           $('#editPatientPhoneCode').prop('disabled', false);
+           $('#editPatientPhoneNumber').prop('disabled', false);
+            $('#add-diagnose-btn').hide();
+        }else{
+           $('#saveAddChanges').show();
+           $('#saveEditChanges').hide();
+           $('#editPatientName').prop('disabled', true);
+           $('#editPatientBirthdate').prop('disabled', true);
+           $('#editPatientAddress').prop('disabled', true);
+           $('#editPatientPhoneCode').prop('disabled', true);
+           $('#editPatientPhoneNumber').prop('disabled', true);
+            $('#add-diagnose-btn').show();
+        }
+     
+        if( Array.isArray( patient.diagnoses) ) patient.diagnoses.forEach((record, index) => editDiagnosisRow(record, index, type));
+        $('#saveEditChanges').prop('disabled', false)
+        $('#editModal').modal('show');
+      }
+
+            // Edit diagnosis row
+            function editDiagnosisRow(record = {}, index, type) {
+
+                let fileLinks = '';
+  if (record.labReports && Array.isArray(record.labReports)) {
+    record.labReports.forEach(file => {
+      fileLinks += `
+        <div class="d-flex justify-content-between border p-2 file-link-block mb-1" data-file-id="${file.id}">
+          <a href="${file.url}" target="_blank">${file.fileName}</a>
+         ${ type ? '<a href="javascript:void(0);" class="text-danger delete-file">Delete</a>' : '' }
+        </div>
+      `;
+    });
+  }
+
+        const row = `
+          <div class="diagnosis-row-edit mb-3 border p-2" data-index="${index}">
+            <div class="mb-2">
+              <input type="hidden" class="editDiagnoseId" value="${record.id || ''}">
+              <label class="form-label">Date</label>
+            <input ${type ? '' : 'disabled' } type="date" class="form-control diagnosis-date" value="${record.date ? record.date.split(' ')[0] : ''}">
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Diagnosis</label>
+              <textarea ${type ? '' : 'disabled' } class="form-control diagnosis-text" rows="3">${record.diagnosis || ''}</textarea>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Treatment</label>
+              <textarea ${type ? '' : 'disabled' } class="form-control treatment-text" rows="3">${record.treatment || ''}</textarea>
+            </div>
+            <label class="form-label">Lab Scan</label>
+            <form enctype="multipart/form-data" method="POST">
+  <div class="mb-3">
+    <input type="file" class="form-control fileUpload" name="file"  accept=".pdf, .jpeg, .jpg, .png" ${type ? '' : 'disabled' } multiple required/>
+             </div>
+          </form>
+          ${fileLinks}
+
+          ${ type ? '<button class="btn btn-sm btn-danger remove-diagnosis-edit">Remove</button>' : '' }
+          </div>`;
+        $('#editDiagnosisRecords').append(row);
+
+        // validation of avoiding future date
+  $("input[type='date']").each(function () {
+    $(this).attr('max', today);
+     // Force reflow trick for iOS Safari
+    const clone = $(this).clone(true);
+    $(this).replaceWith(clone);
+  });
+      }
+
+      function deletePatient(index) {
+        const patient = patients[index];
+       const diagnose = patient.diagnoses
+       const patientId = patient.patientId
+       
+    if (Array.isArray(diagnose) && diagnose.length != 0) {
+    alert(`Please delete the diagnose first`);
+    return;
+  }
+  
+  Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then(async function (result) {
+  if (result.isConfirmed) {
+   try {
+          const response = await fetch(`/api/v1/admin/dashboard/patient/${patientId}`, {
+            method: 'DELETE'
+          });
+          if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+          const data = await response.json();
+        //  $diagnosisBlock.remove();
+        loadPatients()
+        } catch (err) {
+          console.log(err)
+        }
+  }
+});
+      }
+
+
+            // Fetch patients from backend
+      async function loadPatients() {
+        try {
+          patientYearFrom =  $('#birthdateFrom').val(); 
+           from =  $('#fromDate').val(); 
+           patientYearTo = $('#birthdateTo').val(); 
+           to = $('#toDate').val(); 
+           searchPatientName = $('#searchPatientName').val(); 
+           searchPatientAddress = $('#searchPatientAddress').val(); 
+           searchPatientMobileNo = $('#searchPatientMobileNo').val(); 
+           searchTreatment = $('#searchTreatment').val(); 
+           searchDiagnose = $('#searchDiagnose').val(); 
+          const response = await fetch(`/api/v1/admin/dashboard?from=${from}&to=${to}&searchPatientName=${searchPatientName}&searchPatientAddress=${searchPatientAddress}&searchPatientMobileNo=${searchPatientMobileNo}&searchTreatment=${searchTreatment}&searchDiagnose=${searchDiagnose}&birthdateFrom=${patientYearFrom}&birthdateTo=${patientYearTo}&page=${currentPage}&limit=${limit}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+          });
+          if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+          const data = await response.json();
+          patients = data.data.data || []; // Assuming API returns { patients: [], total: number }
+          renderTable();
+          renderPagination(data.data.pagination);
+        } catch (err) {
+          console.error('Failed to fetch patients:', err);
+          $('#patientTableBody').html('<tr><td colspan="4">Failed to load patients</td></tr>');
+        }
+      }
+
+            // Render table with pagination
+      function renderTable() {
+        $('#patientTableBody').empty();
+          if (patients.length === 0) {
+    $('#patientTableBody').html('<tr><td colspan="5" class="text-center">No records found</td></tr>');
+    return;
+  }
+       patients.forEach((patient, index) => {
+  const { diagnoses } = patient;
+
+  // Find latest visit date if diagnoses exist
+  let lastVisitDate = '';
+  if (diagnoses?.length) {
+    let latestDate = diagnoses[0].date;
+
+    for (let i = 1; i < diagnoses.length; i++) {
+      if (new Date(diagnoses[i].date) > new Date(latestDate)) {
+        latestDate = diagnoses[i].date;
+      }
+    }
+
+    const dateObj = new Date(latestDate);
+    lastVisitDate = `${String(dateObj.getDate()).padStart(2, '0')}/${String(dateObj.getMonth() + 1).padStart(2, '0')}/${dateObj.getFullYear()}`;
+  }
+
+  const hasLabReports = diagnoses?.some(d => Array.isArray(d.labReports) && d.labReports.length > 0);
+
+  $('#patientTableBody').append(`
+    <tr>
+      <td>${((currentPage * limit) - limit) + (index + 1)}</td>
+      <td>${patient.name}</td>
+      <td>${patient.birthdate}</td>
+      <td>${patient.address}</td>
+      <td style="text-align: center;">${hasLabReports ? tick : cross}</td>
+      <td style="text-align: center;">${lastVisitDate}</td>
+      <td>
+  <div style="display:flex;gap: 0.5rem;">
+    <button class="btn btn-sm btn-info text-nowrap px-3 view-patient" data-bs-toggle="modal" data-bs-target="#viewModal" onclick="viewPatientDetails(${index})">View</button>
+    <button class="btn btn-sm btn-success text-nowrap px-3" data-bs-toggle="modal" data-bs-target="#editModal" onclick="showEditModal(${index}, false)">Add</button>
+    <button class="btn btn-sm btn-warning text-nowrap px-3" data-bs-toggle="modal" data-bs-target="#editModal" onclick="showEditModal(${index}, true)">Edit</button>
+    <button class="btn btn-sm btn-danger text-nowrap px-3" onclick="deletePatient(${index})">Delete</button>
+  </div>
+      </td>
+    </tr>
+  `);
+});
+
+     
+      }
+
+
+      function renderPagination(pagination) {
+  const { totalPages, page } = pagination;
+  let html = '';
+
+  const createPageItem = (p, active = false, disabled = false) => `
+    <li class="page-item ${active ? 'active' : ''} ${disabled ? 'disabled' : ''}">
+      <a class="page-link" href="#" data-page="${p}">${p}</a>
+    </li>`;
+
+  const addEllipsis = () => `
+    <li class="page-item disabled">
+      <span class="page-link">...</span>
+    </li>`;
+
+  // Previous button
+  html += `
+    <li class="page-item ${page === 1 ? 'disabled' : ''}">
+      <a class="page-link" href="#" data-page="${page - 1}">Previous</a>
+    </li>`;
+
+  // Always show first page
+  if (page > 2) {
+    html += createPageItem(1);
+    if (page > 3) html += addEllipsis();
+  }
+
+  // Show current, one before and one after
+  for (let i = page - 1; i <= page + 1; i++) {
+    if (i > 0 && i <= totalPages) {
+      html += createPageItem(i, i === page);
+    }
+  }
+
+  // Always show last page
+  if (page < totalPages - 1) {
+    if (page < totalPages - 2) html += addEllipsis();
+    html += createPageItem(totalPages);
+  }
+
+  // Next button
+  html += `
+    <li class="page-item ${page === totalPages ? 'disabled' : ''}">
+      <a class="page-link" href="#" data-page="${page + 1}">Next</a>
+    </li>`;
+
+  $('#pagination-controls').html(html);
+}
+
+$(document).ready(function() {
+
+
+
+$(document).on('change', '.fileUpload',async function () {
+  const files = this.files;
+  const $diagnosisBlock = $(this).closest('.diagnosis-row-edit');
+  const existingFiles = $diagnosisBlock.find('.file-link-block').length;
+
+  if ((files.length + existingFiles) > 10) {
+    alert(`You can upload a maximum of 10 files. You already have ${existingFiles} file(s) uploaded.`);
+    $(this).val(''); // Clear selected files
+    return;
+  }
+
+  const maxSizeMB = 5;
+  const validTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+  const validFiles = [];
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+
+    // Validate file size
+    if (file.size > maxSizeMB * 1024 * 1024) {
+      alert(`"${file.name}" exceeds the 5 MB size limit.`);
+      $(this).val('');
+      return;
+    }
+
+    // Validate file type
+    const mimeType = file.type;
+    const ext = file.name.toLowerCase();
+
+    const isValidType = validTypes.includes(mimeType) ||
+      ext.endsWith('.pdf') || ext.endsWith('.jpeg') || ext.endsWith('.jpg') || ext.endsWith('.png');
+
+    if (!isValidType) {
+      alert(`"${file.name}" is not a valid PDF, JPEG, or PNG file.`);
+      $(this).val('');
+      return;
+    }
+
+    validFiles.push(file);
+  }
+
+  // Get diagnose ID
+  const $row = $(this).closest('.diagnosis-row-edit');
+  const diagnoseId = $row.find('.editDiagnoseId').val();
+  const patientId = $('#editPatientId').val()
+  // Prepare FormData
+  const formData = new FormData();
+  formData.append('diagnoseId', diagnoseId);
+  formData.append('patientId', patientId);
+
+  for (let i = 0; i < validFiles.length; i++) {
+  formData.append('files', validFiles[i]); // no square brackets here
+}
+
+
+        try {
+          const response = await fetch('/api/v1/admin/dashboard/report', {
+            method: 'POST',
+            body: formData
+          });
+          if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+          const data = await response.json();
+          const arrayReport = data?.data?.data
+             arrayReport.forEach(file => {
+        const fileBlock = `
+          <div class="d-flex justify-content-between border p-2 file-link-block mb-1" data-file-id="${file.id}">
+            <a href="${file.url}" target="_blank">${file.fileName}</a>
+            <a href="javascript:void(0);" class="text-danger delete-file">Delete</a>
+          </div>
+        `;
+        $row.append(fileBlock);
+      });
+       loadPatients();
+        } catch (err) {
+          console.log(err)
+        }
+});
+
+$(document).on('click', '.delete-file',async function () {
+  const $block = $(this).closest('.file-link-block');
+  const fileId = $block.data('file-id');
+
+  Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then(async function (result) {
+  if (result.isConfirmed) {
+   try {
+          const response = await fetch(`/api/v1/admin/dashboard/report/${fileId}`, {
+            method: 'DELETE'
+          });
+          if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+          const data = await response.json();
+         $block.remove();
+         loadPatients();
+        } catch (err) {
+          console.log(err)
+        }
+  }
+});
+});
+
+
+
+  // initializeDates()
+     $('#fromDate, #toDate').on('change', loadPatients);
+
+     function debounce(func, delay) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), delay);
+  };
+}
+
+const debouncedLoadPatients = debounce(loadPatients, 300);
+
+$('#searchPatientName, #searchTreatment ,#searchDiagnose, #searchPatientAddress, #searchPatientMobileNo').on('input', debouncedLoadPatients);
+
+
+$("#birthdateFrom").datepicker({
+    format: "yyyy",
+    viewMode: "years", 
+    minViewMode: "years",
+    autoclose: true
+});
+$("#birthdateTo").datepicker({
+    format: "yyyy",
+    viewMode: "years", 
+    minViewMode: "years",
+    autoclose: true
+});
+$('#birthdateFrom, #birthdateTo').on('changeDate', ()=>{
+
+        let birthdateFrom = $('#birthdateFrom').val(); 
+        let birthdateto = $('#birthdateTo').val(); 
+        if(birthdateFrom.length == 4 && birthdateto.length == 4){
+          debouncedLoadPatients()
+        }
+});
+
+          $('.clear-btn-from').click(function() {
+
+                $("#birthdateFrom").datepicker('setDate', null); 
+                $("#birthdateFrom").val(''); 
+
+               debouncedLoadPatients()
+            });
+
+            $('.clear-btn-to').click(function() {
+
+                $("#birthdateTo").datepicker('setDate', null); 
+                $("#birthdateTo").val(''); 
+               debouncedLoadPatients()
+            });
+
+
+      // Handle form submission
+      $('#uploadForm').on('submit', async function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        try {
+          const response = await fetch('/api/v1/admin/dashboard', {
+            method: 'POST',
+            body: formData
+          });
+          if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+          const data = await response.json();
+          $('#uploadStatus').html('<div class="alert alert-success">File uploaded successfully!</div>');
+          setTimeout(() => $('#uploadModal').modal('hide'), 1000);
+          showPreviewModal(data);
+        } catch (err) {
+          $('#uploadStatus').html(`<div class="alert alert-danger">Failed to upload: ${err.message}</div>`);
+        }
+      });
+
+      // Show preview/edit modal
+      function showPreviewModal(data) {
+        $('#patientName').val(data.patientDetails.name);
+        $('#patientBirthdate').val(data.patientDetails.birthdate);
+        $('#patientAddress').val(data.patientDetails.address);
+        $('#diagnosisRecords').empty();
+        data.diagnosisRecords.forEach((record, index) => addDiagnosisRow(record, index));
+        $('#saveChanges').prop('disabled', false)
+        $('#previewModal').modal('show');
+      }
+
+      // Add diagnosis row
+      function addDiagnosisRow(record = {}, index) {
+        const row = `
+          <div class="diagnosis-row mb-3" data-index="${index}">
+            <div class="mb-2">
+              <label class="form-label">Date</label>
+            <input type="date" class="form-control diagnosis-date" value="${record.date ? record.date.split('T')[0] : ''}">
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Diagnosis</label>
+              <textarea class="form-control diagnosis-text" rows="3">${record.diagnosis || ''}</textarea>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Treatment</label>
+              <textarea class="form-control treatment-text" rows="3">${record.treatment || ''}</textarea>
+            </div>
+            <button class="btn btn-sm btn-danger remove-diagnosis">Remove</button>
+          </div>`;
+        $('#diagnosisRecords').append(row);
+      }
+
+
+
+
+      // Add new diagnosis
+      $('#addDiagnosis').on('click', () => {
+        const index = $('.diagnosis-row').length;
+        addDiagnosisRow({}, index);
+      });
+
+      // Remove diagnosis
+      $(document).on('click', '.remove-diagnosis', function() {
+        $(this).closest('.diagnosis-row').remove();
+      });
+
+      // Remove diagnosis on edit
+      $(document).on('click', '.remove-diagnosis-edit', function() {
+
+  const $diagnosisBlock = $(this).closest('.diagnosis-row-edit');
+  const diagnoseId = $diagnosisBlock.find('.editDiagnoseId').val();
+  const existingFiles = $diagnosisBlock.find('.file-link-block').length;
+
+    if (existingFiles != 0) {
+    alert(`Please delete the attachment first`);
+    return;
+  }
+  
+  Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then(async function (result) {
+  if (result.isConfirmed) {
+   try {
+          const response = await fetch(`/api/v1/admin/dashboard/diagnose/${diagnoseId}`, {
+            method: 'DELETE'
+          });
+          if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+          const data = await response.json();
+         $diagnosisBlock.remove();
+         loadPatients();
+        } catch (err) {
+          console.log(err)
+        }
+  }
+});
+
+      });
+
+      // Save changes
+      $('#saveChanges').on('click', async () => {
+        $('#saveChanges').prop('disabled', true)
+        const patientDetails = {
+          name: $('#patientName').val(),
+          birthdate: $('#patientBirthdate').val(),
+          address: $('#patientAddress').val()
+        };
+        const diagnosisRecords = [];
+        $('.diagnosis-row').each(function() {
+          diagnosisRecords.push({
+            date: $(this).find('.diagnosis-date').val(),
+            diagnosis: $(this).find('.diagnosis-text').val(),
+            treatment: $(this).find('.treatment-text').val()
+          });
+        });
+        const data = { patientDetails, diagnosisRecords };
+        try {
+          const response = await fetch('/api/v1/admin/dashboard/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+           $('#saveChanges').prop('disabled', false)
+          $('#previewModal').modal('hide');
+          loadPatients();
+        } catch (err) {
+          alert(`Failed to save: ${err.message}`);
+           $('#saveChanges').prop('disabled', false)
+        }
+      });
+
+
+         // Save edited record
+      $('#saveEditChanges').on('click', async () => {
+        // const patientId = $('#editPatientId').val();
+          $('#saveEditChanges').prop('disabled', true)
+
+        let phoneCode = $('#editPatientPhoneCode').val().trim();; 
+        let phoneNumber = $('#editPatientPhoneNumber').val().trim();; 
+        let fullNumber = '';
+        let mobileNo
+
+        if(phoneNumber != ''){
+
+
+    if (!/^\+\d+$/.test(phoneCode)) {
+      alert("Phone code must start with '+' followed by digits (e.g., +961)");
+      $('#saveEditChanges').prop('disabled', false);
+      return;
+    }
+
+     fullNumber = phoneCode + phoneNumber;
+
+         // Clean up any previous temp inputs if still hanging around
+    const oldInput = document.getElementById("tempPhoneInput");
+    if (oldInput) oldInput.remove();
+
+    const tempInput = document.createElement("input");
+    tempInput.type = "tel";
+    tempInput.value = fullNumber;
+    tempInput.id = "tempPhoneInput";
+    document.body.appendChild(tempInput);
+
+    const iti = window.intlTelInput(tempInput, {
+      nationalMode: false,
+      dropdownContainer: null, // Important
+       allowDropdown: false,    // ✅ disables the country selector
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.17/js/utils.js"
+    });
+  // Wait for plugin to initialize (safe delay or async/await won't help here)
+    setTimeout( async () => {
+   const isValid = iti.isValidNumber();
+
+    // Safely remove using ID
+      const tempElement = document.getElementById("tempPhoneInput");
+      if (tempElement) tempElement.remove();
+
+      if (!isValid) {
+        alert("Invalid phone number format (must be valid E.164 format)");
+        $('#saveEditChanges').prop('disabled', false);
+        return;
+      }
+      // Get cleaned full number in E.164
+      const e164Number = iti.getNumber();
+
+         const patientDetails = {
+          name: $('#editPatientName').val(),
+          birthdate: $('#editPatientBirthdate').val() ?  $('#editPatientBirthdate').val() : null,
+          address: $('#editPatientAddress').val() !='' ? $('#editPatientAddress').val() : null ,
+          id : $('#editPatientId').val(),
+          mobileNo: `${phoneCode}-${phoneNumber}`
+        };
+
+        const diagnosisRecords = [];
+        $('.diagnosis-row-edit').each(function() {
+          diagnosisRecords.push({
+            date: $(this).find('.diagnosis-date').val(),
+            diagnosis: $(this).find('.diagnosis-text').val(),
+            treatment: $(this).find('.treatment-text').val(),
+            id: $(this).find('.editDiagnoseId').val(),
+    });
+  });
+        const data = { patientDetails, diagnosisRecords };
+  try {
+          const response = await fetch(`/api/v1/admin/dashboard/`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+    if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+          $('#saveEditChanges').prop('disabled', false)
+    $('#editModal').modal('hide');
+    loadPatients();
+  } catch (err) {
+    alert(`Failed to update: ${err.message}`);
+       $('#saveEditChanges').prop('disabled', false)
+  }
+
+    }, 100);
+
+
+
+        }else{
+                const patientDetails = {
+          name: $('#editPatientName').val(),
+          birthdate: $('#editPatientBirthdate').val() ?  $('#editPatientBirthdate').val() : null,
+          address: $('#editPatientAddress').val() !='' ? $('#editPatientAddress').val() : null ,
+          id : $('#editPatientId').val(),
+          mobileNo: phoneNumber != '' ? `${phoneCode}-${phoneNumber}` : null ,
+        };
+
+        const diagnosisRecords = [];
+        $('.diagnosis-row-edit').each(function() {
+          diagnosisRecords.push({
+            date: $(this).find('.diagnosis-date').val(),
+            diagnosis: $(this).find('.diagnosis-text').val(),
+            treatment: $(this).find('.treatment-text').val(),
+            id: $(this).find('.editDiagnoseId').val(),
+    });
+  });
+        const data = { patientDetails, diagnosisRecords };
+  try {
+          const response = await fetch(`/api/v1/admin/dashboard/`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+    if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+          $('#saveEditChanges').prop('disabled', false)
+    $('#editModal').modal('hide');
+    loadPatients();
+  } catch (err) {
+    alert(`Failed to update: ${err.message}`);
+       $('#saveEditChanges').prop('disabled', false)
+  }
+        }
+
+
+});
+
+
+
+    $(document).on('click', '.page-link', function(e) {
+    e.preventDefault();
+    const page = parseInt($(this).data('page'));
+    if (!isNaN(page)) {
+      currentPage = page;
+      loadPatients();
+    }
+  });
+
+  $('#items-per-page').on('change', function () {
+  limit = parseInt($(this).val());
+  currentPage = 1; // reset to first page
+  loadPatients();
+});
+
+
+$(document).on('click', '#download-pdf-btn',async function () {
+
+  const element = document.getElementById('patient-pdf-content');
+  const opt = {
+    margin:       0.5 ,
+    filename:     `Patient-details.pdf`,
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait' }
+  };
+  html2pdf().set(opt).from(element).save();
+
+});
+
+$(document).on('click', '#add-diagnose-btn',async function () {
+
+   const row = `
+          <div class="diagnosis-row-add mb-3 border p-2" data-index="">
+            <div class="mb-2">
+              <label class="form-label">Date</label>
+            <input type="date" class="form-control diagnosis-date" value="">
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Diagnosis</label>
+              <textarea class="form-control diagnosis-text" rows="3"></textarea>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Treatment</label>
+              <textarea class="form-control treatment-text" rows="3"></textarea>
+            </div>
+            <label class="form-label">Lab Scan</label>
+            <form enctype="multipart/form-data" method="POST">
+  <div class="mb-3">
+    <input type="file" class="form-control fileUploadAddDiagnose" name="file"  accept=".pdf, .jpeg, .jpg, .png" multiple required/>
+             </div>
+          </form>
+         
+           <button class="btn btn-sm btn-danger remove-diagnosis-add">Remove</button>
+          </div>`;
+
+       const $container = $('#editDiagnosisRecords');
+    $container.append(row);
+
+     // Scroll to bottom of the modal-body
+  const $modalBody = $('#diagnosisModalBody');
+  $modalBody.animate({
+    scrollTop: $modalBody[0].scrollHeight
+  }, 500); // smooth scroll
+
+          // validation of avoiding future date
+
+  $("input[type='date']").each(function () {
+    $(this).attr('max', today);
+     // Force reflow trick for iOS Safari
+    const clone = $(this).clone(true);
+    $(this).replaceWith(clone);
+  });
+
+});
+
+$(document).on('change', '.fileUploadAddDiagnose',async function () {
+  const files = this.files;
+  const $diagnosisBlock = $(this).closest('.diagnosis-row-edit');
+
+  if ((files.length) > 10) {
+    alert(`You can upload a maximum of 10 files.`);
+    $(this).val(''); // Clear selected files
+    return;
+  }
+
+  const maxSizeMB = 5;
+  const validTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+  const validFiles = [];
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+
+    // Validate file size
+    if (file.size > maxSizeMB * 1024 * 1024) {
+      alert(`"${file.name}" exceeds the 5 MB size limit.`);
+      $(this).val('');
+      return;
+    }
+
+    // Validate file type
+    const mimeType = file.type;
+    const ext = file.name.toLowerCase();
+
+    const isValidType = validTypes.includes(mimeType) ||
+      ext.endsWith('.pdf') || ext.endsWith('.jpeg') || ext.endsWith('.jpg') || ext.endsWith('.png');
+
+    if (!isValidType) {
+      alert(`"${file.name}" is not a valid PDF, JPEG, or PNG file.`);
+      $(this).val('');
+      return;
+    }
+
+    validFiles.push(file);
+  }
+
+  const formData = new FormData();
+
+  for (let i = 0; i < validFiles.length; i++) {
+  formData.append('files', validFiles[i]); // no square brackets here
+}
+
+});
+
+      // Remove diagnosis on add
+      $(document).on('click', '.remove-diagnosis-add', function() {
+
+  const $diagnosisBlock = $(this).closest('.diagnosis-row-add');
+  $diagnosisBlock.remove();
+
+      });
+
+// Save add diagnose record
+$('#saveAddChanges').on('click', async () => {
+  $('#saveAddChanges').prop('disabled', true);
+
+  // Check if there are any .diagnosis-row-add elements
+  const diagnosisRows = $('.diagnosis-row-add');
+  if (diagnosisRows.length === 0) {
+    alert('Please add at least one diagnosis row before saving.');
+    $('#saveAddChanges').prop('disabled', false); // Re-enable the button
+    return; // Stop further execution
+  }
+
+  const formData = new FormData();
+
+  // Check for empty date values in diagnosis rows
+  let hasEmptyDate = false;
+  $('.diagnosis-row-add').each(function(index) {
+    const $row = $(this);
+    const dateValue = $row.find('.diagnosis-date').val();
+    
+    // Check if date is empty, null, or undefined
+    if (!dateValue || dateValue.trim() === '') {
+      hasEmptyDate = true;
+      return false; // Break the .each() loop
+    }
+  });
+
+  // If any date is empty, show alert and stop submission
+  if (hasEmptyDate) {
+    alert('Please fill in the date for all diagnosis rows before saving.');
+    $('#saveAddChanges').prop('disabled', false); // Re-enable the button
+    return; // Stop further execution
+  }
+
+  // Proceed with populating FormData if validation passes
+  $('.diagnosis-row-add').each(function(index) {
+    const $row = $(this);
+    const files = $row.find('.fileUploadAddDiagnose')[0]?.files || [];
+
+    formData.append(`diagnoses[${index}][date]`, $row.find('.diagnosis-date').val());
+    formData.append(`diagnoses[${index}][diagnosis]`, $row.find('.diagnosis-text').val());
+    formData.append(`diagnoses[${index}][treatment]`, $row.find('.treatment-text').val());
+    formData.append(`diagnoses[${index}][patientId]`, $('#editPatientId').val());
+
+    // Append all files for this diagnosis
+    Array.from(files).forEach(file => {
+      formData.append(`diagnoses[${index}][files][]`, file);
+    });
+  });
+
+  try {
+    const response = await fetch(`/api/v1/admin/dashboard/add-diagnose`, {
+      method: 'POST',
+      body: formData // Don't set Content-Type; the browser handles it
+    });
+
+    if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+    $('#saveAddChanges').prop('disabled', false);
+    $('#editModal').modal('hide');
+    loadPatients();
+  } catch (err) {
+    alert(`Failed to update: ${err.message}`);
+    $('#saveAddChanges').prop('disabled', false); // Re-enable button on error
+  }
+});
+
+      // Add new patient
+      $('#saveNewPatient').on('click', async () => {
+
+        $('#saveNewPatient').prop('disabled', true)
+        let phoneCode = $('#newPatientPhoneCode').val().trim();; 
+        let phoneNumber = $('#newPatientPhoneNumber').val().trim();; 
+        let fullNumber = '';
+        let mobileNo
+
+        if($('#newPatientName').val() ==''){
+          alert("Name field is required")
+           $('#saveNewPatient').prop('disabled', false)
+           return 
+        }
+
+        if(phoneNumber != ''){
+
+        if (!/^\+\d+$/.test(phoneCode)) {
+      alert("Phone code must start with '+' followed by digits (e.g., +961)");
+      $('#saveNewPatient').prop('disabled', false);
+      return;
+    }
+
+     fullNumber = phoneCode + phoneNumber;
+
+         // Clean up any previous temp inputs if still hanging around
+    const oldInput = document.getElementById("tempPhoneInput");
+    if (oldInput) oldInput.remove();
+
+    const tempInput = document.createElement("input");
+    tempInput.type = "tel";
+    tempInput.value = fullNumber;
+    tempInput.id = "tempPhoneInput";
+    document.body.appendChild(tempInput);
+
+    const iti = window.intlTelInput(tempInput, {
+      nationalMode: false,
+      dropdownContainer: null, // Important
+       allowDropdown: false,    // ✅ disables the country selector
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.17/js/utils.js"
+    });
+  // Wait for plugin to initialize (safe delay or async/await won't help here)
+    setTimeout( async () => {
+   const isValid = iti.isValidNumber();
+
+    // Safely remove using ID
+      const tempElement = document.getElementById("tempPhoneInput");
+      if (tempElement) tempElement.remove();
+
+      if (!isValid) {
+        alert("Invalid phone number format (must be valid E.164 format)");
+        $('#saveNewPatient').prop('disabled', false);
+        return;
+      }
+      // Get cleaned full number in E.164
+      const e164Number = iti.getNumber();
+
+
+      // Build patient details
+      const patientDetails = {
+        name: $('#newPatientName').val().trim(),
+        birthdate: $('#newPatientBirthdate').val(),
+        address: $('#newPatientAddress').val(),
+        mobileNo: `${phoneCode}-${phoneNumber}`
+      };
+    
+          const data = { patientDetails };
+          try {
+            const response = await fetch('/api/v1/admin/dashboard/add-patient', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            });
+            if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+            $('#saveNewPatient').prop('disabled', false)
+            $('#newModal').modal('hide');
+            loadPatients();
+          } catch (err) {
+            alert(`Failed to save: ${err.message}`);
+            $('#saveNewPatient').prop('disabled', false)
+          }
+    }, 100);
+
+        }else{
+
+          const patientDetails = {
+            name: $('#newPatientName').val(),
+            birthdate: $('#newPatientBirthdate').val(),
+            address: $('#newPatientAddress').val(),
+            // mobileNo: phoneNumber == '' ? null : mobileNo
+          };
+          
+          const data = { patientDetails };
+          try {
+            const response = await fetch('/api/v1/admin/dashboard/add-patient', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            });
+            if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+            $('#saveNewPatient').prop('disabled', false)
+            $('#newModal').modal('hide');
+            loadPatients();
+          } catch (err) {
+            alert(`Failed to save: ${err.message}`);
+            $('#saveNewPatient').prop('disabled', false)
+          }
+        }
+      });
+
+$('#newModal').on('shown.bs.modal', function () {
+  // Clear input fields
+  $('#newPatientName').val('');
+  $('#newPatientBirthdate').val('');
+  $('#newPatientAddress').val('');
+  $('#newPatientPhoneCode').val('+961');
+  $('#newPatientPhoneNumber').val('');
+
+  // Optionally remove validation styles
+  // $('#newModal input').removeClass('is-valid is-invalid');
+});
+$('#viewModal').on('hidden.bs.modal', function () {
+  $(this).find('.modal-body').empty();
+});
+
+$('#exportButton').click(async function() {
+   $('#exportButton').prop('disabled', true);
+  try {
+           patientYearFrom =  $('#birthdateFrom').val(); 
+           from =  $('#fromDate').val(); 
+           patientYearTo = $('#birthdateTo').val(); 
+           to = $('#toDate').val(); 
+           searchPatientName = $('#searchPatientName').val(); 
+           searchPatientAddress = $('#searchPatientAddress').val(); 
+           searchPatientMobileNo = $('#searchPatientMobileNo').val(); 
+           searchTreatment = $('#searchTreatment').val(); 
+           searchDiagnose = $('#searchDiagnose').val(); 
+    const response = await fetch(`/api/v1/admin/dashboard/export?from=${from}&to=${to}&searchPatientName=${searchPatientName}&searchPatientAddress=${searchPatientAddress}&searchPatientMobileNo=${searchPatientMobileNo}&searchTreatment=${searchTreatment}&searchDiagnose=${searchDiagnose}&birthdateFrom=${patientYearFrom}&birthdateTo=${patientYearTo}&page=${currentPage}&limit=${limit}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+
+    const blob = await response.blob(); // ✅ convert response to blob
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = 'Report.pdf';
+    document.body.appendChild(link); // Optional: add to DOM for Firefox
+    link.click();
+    document.body.removeChild(link); // Cleanup
+     $('#exportButton').prop('disabled', false);
+  } catch (err) {
+    $('#exportButton').prop('disabled', false);
+    alert(`Failed to save: ${err.message}`);
+  }
+});
+
+   
+      // Initial load
+      loadPatients();
+    });
+  </script>
+</body>
+</html>
