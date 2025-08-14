@@ -3,9 +3,13 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+require('dotenv').config
 
 const router = express.Router();
 
+if (!process.env.JWT_SECRET) {
+  console.warn("JWT_SECRET is not set. Set it in your .env file.");
+}
 // login page
 router.get("/superadmin/login", (req, res) => {
   // use views/superadmin/login.ejs (see step 3)
@@ -18,7 +22,7 @@ router.post("/superadmin/login", async (req, res) => {
 
   const U = process.env.SUPERADMIN_USER || "admin";
   const HASH = process.env.SUPERADMIN_PASS_HASH || "";
-  const PLAIN = process.env.SUPERADMIN_PASS || "admin@123";
+  const PLAIN = process.env.SUPERADMIN_PASS || "!DMC@12345";
 
   if (username !== U) return res.status(401).render("superadmin/login", { error: "Invalid credentials" });
 
