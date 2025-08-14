@@ -260,10 +260,34 @@ exports.findAllPatients = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`Something went wrong while getting all client from DB`, 500));
   } else {
     const { paginatedResults, currentPage, currentLimit, totalCount } = transactionsData;
+
+    // === ADDED: attach presigned URLs for labReports so front-end can use file.url ===
+    const enrichedResults = await Promise.all((paginatedResults || []).map(async (p) => {
+      if (!Array.isArray(p.diagnoses)) return p;
+
+      const newDiagnoses = await Promise.all(p.diagnoses.map(async (d) => {
+        if (!Array.isArray(d.labReports)) return d;
+
+        const newReports = await Promise.all(d.labReports.map(async (r) => {
+          try {
+            const presigned = await getTemporaryUrl(r.key);
+            return { ...r, url: presigned?.url || null };
+          } catch (e) {
+            // Don't fail the whole response if a single presign fails
+            return { ...r, url: null };
+          }
+        }));
+
+        return { ...d, labReports: newReports };
+      }));
+
+      return { ...p, diagnoses: newDiagnoses };
+    }));
+
     return res.status(200).json({
       status: true,
       data: {
-        data: paginatedResults,
+        data: enrichedResults,
         pagination: {
           total: totalCount,
           page: currentPage,
