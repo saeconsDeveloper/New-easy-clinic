@@ -18,7 +18,7 @@ router.post("/superadmin/login", async (req, res) => {
 
   const U = process.env.SUPERADMIN_USER || "admin";
   const HASH = process.env.SUPERADMIN_PASS_HASH || "";
-  const PLAIN = process.env.SUPERADMIN_PASS || "admin";
+  const PLAIN = process.env.SUPERADMIN_PASS || "admin@123";
 
   if (username !== U) return res.status(401).render("superadmin/login", { error: "Invalid credentials" });
 
